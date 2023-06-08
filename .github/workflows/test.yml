@@ -22,11 +22,7 @@ jobs:
       - run: |
           echo "Log level: $LEVEL"
           echo "Tags: $TAGS"
-          echo "SECRET_NAME=$LEVEL" >> $GITHUB_ENV
-          echo "SECRET_VALUE=${{ secrets.$LEVEL }}" >> $GITHUB_ENV
-          secret_name=${{ env.SECRET_NAME }}
-          secret_value=${{ env.SECRET_VALUE }}
-          echo "The value of ${secret_name} is ${secret_value}"
+          echo "::set-env name=LEVEL::${{ secrets[env.LEVEL] }}"
         env:
           LEVEL: ${{ inputs.logLevel }}
           TAGS: ${{ inputs.tags }}
