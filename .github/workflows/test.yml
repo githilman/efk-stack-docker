@@ -22,7 +22,9 @@ jobs:
       - run: |
           echo "Log level: $LEVEL"
           echo "Tags: $TAGS"
-          echo ${{ secrets."$LEVEL"}}
+          secret="${{ secrets."+$LEVEL+"}}"
+          echo $secret
+          #echo ${{ secrets."$LEVEL"}}
         env:
           LEVEL: ${{ inputs.logLevel }}
           TAGS: ${{ inputs.tags }}
